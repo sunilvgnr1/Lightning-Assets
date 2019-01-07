@@ -1,0 +1,45 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    <aura:attribute name="dummyAccList" type="Object" />
+    
+    <!--pagiation  starts required attributes to call pagination component-->
+    <aura:attribute name="maxLength" 	 type="integer" default="0" />     
+    <aura:attribute name="startPoint" 		type="integer" default="0"/>
+    <aura:attribute name="endPoint" 	   type="integer" default="10"/>
+    <aura:attribute name="PageLimit" 	   type="integer" default="10"/>
+    <aura:attribute name="ButtonLimit"    type="integer" default="10"/>    
+    <!---->
+    
+    
+    
+    <aura:attribute name="Total" 				type="integer" default="0" />
+    <aura:attribute name="currentPage" 		type="integer" default="1"/>
+    <aura:attribute name="lastPage"			  type="integer" />    
+    <aura:attribute name="preFlag" 			  type="Boolean" default="true"/>
+    <aura:attribute name="nextFlag" 		 type="Boolean" default="false"/>
+    
+    <!--pagiation  ends-->
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    
+    
+    <div class=" slds-grid_align-center"> Pagination Demo
+        <div class="slds-col">
+            <aura:iteration items="{!v.dummyAccList}" var="it" indexVar="index" start="{!v.startPoint}" end="{!v.endPoint}">
+                <ui:inputtext value="{!it.Name}" />
+            </aura:iteration>
+        </div>
+        
+        <div class="slds-large-size_8-of-12 slds-grid_align-center slds-text-align--center" style="margin-left: 145px;">
+            <aura:if isTrue="{!((v.dummyAccList.length > 0) &amp;&amp; (v.PageLimit > 0 ) &amp;&amp; (v.ButtonLimit > 0 ) )  }">
+                <c:DemoPagination PageLimit="{!v.PageLimit}" 
+                                  ButtonLimit="{!v.ButtonLimit}"
+                                  maxLength="{!v.dummyAccList.length}"
+                                  startPoint="{!v.startPoint}"
+                                  endPoint="{!v.endPoint}"
+                                  />
+            </aura:if>
+        </div>
+    </div>    
+ 
+</aura:component>
